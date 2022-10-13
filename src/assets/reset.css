@@ -1,4 +1,9 @@
-*{
+@font-face {
+    font-family: Furore;
+    src: url(/src/assets/Furore.otf);
+}
+
+* {
     margin: 0;
     padding: 0;
 }

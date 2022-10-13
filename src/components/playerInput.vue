@@ -1,50 +1,71 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 
-const props = defineProps<{
-    running: boolean;
-}>();
-
+type RPS = 'Rock' | 'Paper' | 'Scissors';
 enum Result {
     Rock = 'Rock',
     Paper = 'Paper',
     Scissors = 'Scissors'
 }
-let result = ref<string>('');
-const emit = defineEmits(['cpuGameDone']);
+let choice = ref<RPS>();
 
-watch(
-    () => props.running,
-    (value) => {
-        let numResult: number = Math.floor(Math.random() * 3);
-        switch (numResult) {
-            case 0:
-                result.value = Result.Rock;
-                break;
-            case 1:
-                result.value = Result.Paper;
-                break;
-            case 2:
-                result.value = Result.Scissors;
-                break;
-        }
-        emit('cpuGameDone', 'result.value');
-    }
-);
+const emit = defineEmits<{
+    (e: 'player-has-chosen', result: RPS): void;
+}>();
+
+watch(choice, (value) => {
+    choice.value && emit('player-has-chosen', choice.value);
+});
 </script>
 
 <template>
-    <div class="cpu-result">
-        <img src="/src/assets/rockkey.svg" alt="ROCK" />
-        <img src="/src/assets/paperkey.svg" alt="PAPER" />
-        <img src="/src/assets/scissorskey.svg" alt="SCISSORS" />
+    <div class="player-keys">
+        <button>
+            <img
+                src="/src/assets/rockkey.png"
+                class="key"
+                alt="ROCK"
+                @click="choice = Result.Rock"
+            />
+        </button>
+        <button>
+            <img
+                src="/src/assets/paperkey.png"
+                class="key"
+                alt="PAPER"
+                @click="choice = Result.Paper"
+            />
+        </button>
+        <button>
+            <img
+                src="/src/assets/scissorskey.png"
+                class="key"
+                alt="SCISSORS"
+                @click="choice = Result.Scissors"
+            />
+        </button>
     </div>
 </template>
 
 <style scoped>
-.cpu-result {
+
+button {
+    all: unset;
 }
-.cpu-result img {
-    height: 200px;
+.player-keys {
+    display: flex;
+    gap: 16px;
 }
+
+
+.player-keys button:focus img {
+    transform: translate(1px, 3px);
+    filter: drop-shadow(2px 2px 2px #474747);
+}
+.key {
+    height: 75px;
+    cursor: pointer;
+    filter: drop-shadow(3px 5px 3px #474747);
+}
+
 </style>
