@@ -20,17 +20,15 @@ watch(
         switch (numResult) {
             case 0:
                 result.value = Result.Rock;
-                emit('cpuGameDone', 'Rock');
                 break;
             case 1:
                 result.value = Result.Paper;
-                emit('cpuGameDone', 'Paper');
                 break;
             case 2:
                 result.value = Result.Scissors;
-                emit('cpuGameDone', 'Scissors');
                 break;
         }
+        emit('cpuGameDone', 'result.value');
     }
 );
 </script>
@@ -49,7 +47,6 @@ watch(
 
 <style scoped>
 .cpu-result {
-
 }
 .cpu-result img {
     height: 200px;

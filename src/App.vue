@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import CpuPlayer from './components/CpuPlayer.vue';
+import cpuPlayer from './components/cpuPlayer.vue';
 
 let running = ref<boolean>(false);
 let winner = ref<number>(0);
@@ -13,8 +13,6 @@ function toggleRunning(): void {
 function printResult(e: string): void {
     running.value = false;
 }
-
-
 </script>
 
 <template>
@@ -22,14 +20,14 @@ function printResult(e: string): void {
 
     <main>
         <div class="playing-field">
-            <CpuPlayer
-            :running="running"
-            :key="1"
-            @cpu-game-done="printResult($event)"
+            <cpuPlayer
+                :running="running"
+                :key="1"
+                @cpu-game-done="printResult($event)"
             />
         </div>
         <button @click="toggleRunning">Play</button>
-        <ScoreKeeper :winner=0 />
+        <ScoreKeeper :winner="0" />
     </main>
 </template>
 
