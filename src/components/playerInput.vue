@@ -51,10 +51,15 @@ watch(choice, (value) => {
 
 button {
     all: unset;
+    height: 100%;
 }
 .player-keys {
     display: flex;
-    gap: 16px;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-end;
+    height: 100%;
+    max-width: 300px;
 }
 
 
@@ -62,10 +67,11 @@ button {
     transform: translate(1px, 3px);
     filter: drop-shadow(2px 2px 2px #474747);
 }
-.key {
-    height: 75px;
+button .key {
     cursor: pointer;
     filter: drop-shadow(3px 5px 3px #474747);
+    max-height: 100%;
+    max-width: 80px;
 }
 
 </style>

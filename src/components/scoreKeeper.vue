@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue';
 
 const props = defineProps<{
-    winner: 0 | 1 | 2;
+    winner: null | 0 | 1 | 2;
 }>();
 
 interface Score {
@@ -18,13 +18,13 @@ const emit = defineEmits(['scoreKeepingDone']);
 watch(
     () => props.winner,
     (winner) => {
-        if (props.winner > 0) {
+        if (props.winner && props.winner > 0) {
             if (winner === 1) {
                 score.value.player1++;
-                score.value.player2 > 0 && score.value.player2--;
+                // score.value.player2 > 0 && score.value.player2--;
             } else {
                 score.value.player2++;
-                score.value.player1 > 0 && score.value.player1--;
+                // score.value.player1 > 0 && score.value.player1--;
             }
             emit('scoreKeepingDone');
         }
@@ -45,10 +45,11 @@ watch(
     display: flex;
     flex-direction: row;
     gap: 15px;
-    margin-top: 1rem;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     width: 100%;
+    height: 100%;
+    margin-top: 1rem;
 }
 
 p {

@@ -4,6 +4,8 @@ import cpuPlayer from './components/cpuPlayer.vue';
 import playerInput from './components/playerInput.vue';
 import scoreKeeper from './components/scoreKeeper.vue';
 import runningAnimation from './components/runningAnimation.vue';
+import playerChoice from './components/playerChoice.vue';
+import ShowResultBanner from './components/showResultBanner.vue';
 
 type RPS = 'Rock' | 'Paper' | 'Scissors';
 
@@ -13,14 +15,13 @@ interface Results {
 }
 
 let running = ref<boolean>(false);
-let winner = ref<0 | 1 | 2>(0);
+let winner = ref<null | 0 | 1 | 2>(null);
 let results = ref<Results>({ player1: null, player2: null });
 
 function toggleRunning(): void {
-    winner.value = 0;
+    winner.value = null;
     results.value.player1 = null;
     running.value = !running.value;
-
 }
 
 function setPlayerChoice(choice: RPS): void {
@@ -61,38 +62,20 @@ function determineWinner(): void {
 </script>
 
 <template>
-    <header></header>
-
     <main>
-        <scoreKeeper :winner="winner" />
+        <div class="score-keeper">
+            <scoreKeeper :winner="winner" />
+        </div>
         <div class="playing-field">
             <runningAnimation v-if="running" />
-            <div class="human-result">
-                <img
-                    src="/src/assets/rock.svg"
-                    alt="ROCK"
-                    v-if="!running && results.player1 == 'Rock'"
-                />
-                <img
-                    src="/src/assets/paper.svg"
-                    alt="PAPER"
-                    v-if="!running && results.player1 == 'Paper'"
-                />
-                <img
-                    src="/src/assets/scissors.svg"
-                    alt="SCISSORS"
-                    v-if="!running && results.player1 == 'Scissors'"
-                />
-                <img
-                    src="/src/assets/handleft.svg"
-                    alt="?"
-                    v-if="!running && !results.player1"
-                />
-            </div>
+            <playerChoice :running="running" :choice="results.player1" />
             <cpuPlayer
                 :running="running"
                 @cpu-has-chosen="setCpuChoice($event)"
             />
+            <Transition>
+                <showResultBanner :winner="winner" v-if="winner != null" />
+            </Transition>
         </div>
         <div class="controlls">
             <playerInput
@@ -118,13 +101,16 @@ main {
     height: 100%;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
+}
+
+.score-keeper {
+    height: 15%;
 }
 .playing-field {
     width: 80%;
-    height: 70%;
-    min-height: 70%;
+    height: 67%;
+    min-height: 67%;
     max-height: 70%;
     display: flex;
     justify-content: center;
@@ -135,20 +121,41 @@ button {
     all: unset;
 }
 
-.key {
-    height: 75px;
-}
-
 .human-result img {
     height: 200px;
     margin: 20px;
-    filter: drop-shadow(0px 0px 28px #FFFFFF);
+    filter: drop-shadow(0px 0px 28px #ffffff);
+}
+
+.controlls {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+
+.controlls button {
+    height: 100%;
 }
 .controlls button:focus img {
     transform: translate(1px, 3px);
     filter: drop-shadow(2px 2px 2px #474747);
 }
-.controlls img {
+button img {
     filter: drop-shadow(3px 5px 3px #474747);
+    max-height: 100%;
+    max-width: 300px;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.2s ease-in;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
 }
 </style>
