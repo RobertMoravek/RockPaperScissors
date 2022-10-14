@@ -23,4 +23,4 @@ https://stone-cardboard-sheares.netlify.app/
 
 ## Preview
 
-![Preview](https://github.com/RobertMoravek/rock-paper-scissors/blob/master/preview.jpg)
+![Preview](https://github.com/RobertMoravek/RockPaperScissors/blob/master/preview.jpg)
