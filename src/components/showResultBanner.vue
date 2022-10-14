@@ -5,6 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
+    <!-- If a winner (or draw) was set, then display the matching banner -->
     <div class="results-banner">
         <img src="/src/assets/win.png" alt="YOU WIN!" v-if="winner === 1" />
         <img src="/src/assets/lose.png" alt="YOU LOSE!" v-if="winner === 2" />

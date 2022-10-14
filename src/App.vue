@@ -5,7 +5,7 @@ import playerInput from './components/playerInput.vue';
 import scoreKeeper from './components/scoreKeeper.vue';
 import runningAnimation from './components/runningAnimation.vue';
 import playerChoice from './components/playerChoice.vue';
-import ShowResultBanner from './components/showResultBanner.vue';
+import showResultBanner from './components/showResultBanner.vue';
 
 type RPS = 'Rock' | 'Paper' | 'Scissors';
 
@@ -14,28 +14,33 @@ interface Results {
     player2: null | RPS;
 }
 
-let running = ref<boolean>(false);
-let winner = ref<null | 0 | 1 | 2>(null);
-let results = ref<Results>({ player1: null, player2: null });
 
+let running = ref<boolean>(false); // Running variable controlls many Components
+let results = ref<Results>({ player1: null, player2: null }); // What the player and the computer have chosen
+let winner = ref<null | 0 | 1 | 2>(null);
+
+// Starts a new round by resetting values and setting running to true
 function toggleRunning(): void {
     winner.value = null;
     results.value.player1 = null;
     running.value = !running.value;
 }
 
+// Sets player choice, after receiving it from the Comp
 function setPlayerChoice(choice: RPS): void {
     if (running.value) {
         results.value.player1 = choice;
     }
 }
 
+// Sets CPU choice, after receiving it from the Comp & ends the turn (time for player to decide)
 function setCpuChoice(choice: RPS): void {
     results.value.player2 = choice;
     running.value = false;
     determineWinner();
 }
 
+// Determines, who won
 function determineWinner(): void {
     if (results.value.player1 && results.value.player2) {
         switch (results.value.player1 + results.value.player2) {
@@ -56,6 +61,7 @@ function determineWinner(): void {
                 break;
         }
     } else {
+        // If the player didn't chose, they lose
         winner.value = 2;
     }
 }
@@ -67,21 +73,28 @@ function determineWinner(): void {
             <scoreKeeper :winner="winner" />
         </div>
         <div class="playing-field">
-            <runningAnimation v-if="running" />
+            <!-- Hands doing the rock, paper, scissors motion -->
+            <runningAnimation v-if="running" /> 
+            <!-- Displays, what the player chose -->
             <playerChoice :running="running" :choice="results.player1" />
-            <cpuPlayer
+            <!-- Choses and displays the cpu's choice  -->   
+            <cpuPlayer  
                 :running="running"
                 @cpu-has-chosen="setCpuChoice($event)"
             />
+            <!-- Shows who won -->
             <Transition>
                 <showResultBanner :winner="winner" v-if="winner != null" />
             </Transition>
         </div>
+
         <div class="controlls">
+            <!-- Shows the rock, paper and scissor button -->
             <playerInput
                 @player-has-chosen="setPlayerChoice($event)"
                 v-if="running"
             />
+            <!-- Play button -->
             <button>
                 <img
                     src="/src/assets/playkey.png"

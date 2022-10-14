@@ -19,11 +19,13 @@ const emit = defineEmits<{
     (e: 'cpu-has-chosen', result: RPS): void;
 }>();
 
+// If running is changing and true...
 watch(
     () => props.running,
     (value) => {
         if (props.running) {
             showResult.value = false;
+            // ... wait 2 seconds, chose rock, paper or scissors...
             setTimeout(() => {
                 let numResult: number = Math.floor(Math.random() * 3);
                 switch (numResult) {
@@ -37,7 +39,7 @@ watch(
                         result.value = Result.Scissors;
                         break;
                 }
-
+                // ... emit the result and set the variable to show it to true
                 showResult.value = true;
                 result.value && emit('cpu-has-chosen', result.value);
             }, 2000);
@@ -47,6 +49,7 @@ watch(
 </script>
 
 <template>
+    <!-- If show result is true and there is a result, then show it -->
     <div class="cpu-result">
         <img
             src="/src/assets/rock.svg"
@@ -67,8 +70,6 @@ watch(
 </template>
 
 <style scoped>
-.cpu-result {
-}
 .cpu-result img {
     height: 200px;
     margin: 20px;

@@ -1,6 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
+    <!-- Just an animation of two hands going up and down endlessly -->
     <div class="running-animation">
         <img src="/src/assets/handleft.svg" alt="Left Hand" />
         <img src="/src/assets/handright.svg" alt="Right Hand" />
@@ -26,10 +27,6 @@
         -webkit-transform: translate(0, 15vh);
         transform: translate(0, 15vh);
     }
-    /* 50% {
-        -webkit-transform: translate(-10%, -20%);
-        transform: translate(-10%, -20%);
-    } */
     100% {
         -webkit-transform: translate(0, -25vh);
         transform: translateY(0, -25vh);
@@ -40,10 +37,6 @@
         -webkit-transform: translate(0, 15vh);
         transform: translate(0, 15vh);
     }
-    /* 50% {
-        -webkit-transform: translate(-10%, -25%);
-        transform: translate(-10%, -25%);
-    } */
     100% {
         -webkit-transform: translate(0, -25vh);
         transform: translateY(0, -25vh);

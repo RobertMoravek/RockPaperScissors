@@ -11,6 +11,7 @@ const props = defineProps<{
 </script>
 
 <template>
+    <!-- If the game isn't running, then display the user's choice (or lack thereof) -->
     <div class="human-result">
         <img
             src="/src/assets/rock.svg"

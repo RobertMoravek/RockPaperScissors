@@ -13,6 +13,7 @@ const emit = defineEmits<{
     (e: 'player-has-chosen', result: RPS): void;
 }>();
 
+// If the player has chosen, then emit their choice back to the app
 watch(choice, (value) => {
     choice.value && emit('player-has-chosen', choice.value);
 });

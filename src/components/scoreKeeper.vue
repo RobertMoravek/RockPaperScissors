@@ -13,26 +13,26 @@ let score = ref<Score>({
     player1: 0,
     player2: 0
 });
-const emit = defineEmits(['scoreKeepingDone']);
 
+
+// If a winner was passed in and it's not null (rest state) or 0 (draw)....
 watch(
     () => props.winner,
     (winner) => {
         if (props.winner && props.winner > 0) {
+            // ... award the point to the correct player
             if (winner === 1) {
                 score.value.player1++;
-                // score.value.player2 > 0 && score.value.player2--;
             } else {
                 score.value.player2++;
-                // score.value.player1 > 0 && score.value.player1--;
             }
-            emit('scoreKeepingDone');
         }
     }
 );
 </script>
 
 <template>
+    <!-- Display the scores -->
     <div class="scores">
         <img src="/src/assets/playericon.png" alt="YOU" />
         <p>{{ score.player1 }} : {{ score.player2 }}</p>
