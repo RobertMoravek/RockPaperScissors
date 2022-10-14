@@ -8,7 +8,6 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "start": "run-p type-check build-only"
   },
   "dependencies": {
     "vue": "^3.2.38"
