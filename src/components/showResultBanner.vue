@@ -7,9 +7,9 @@ const props = defineProps<{
 <template>
     <!-- If a winner (or draw) was set, then display the matching banner -->
     <div class="results-banner">
-        <img src="/src/assets/win.png" alt="YOU WIN!" v-if="winner === 1" />
-        <img src="/src/assets/lose.png" alt="YOU LOSE!" v-if="winner === 2" />
-        <img src="/src/assets/draw.png" alt="DRAW!" v-if="winner === 0" />
+        <img src="/src/assets/win.png" alt="YOU WIN!" v-show="winner === 1" />
+        <img src="/src/assets/lose.png" alt="YOU LOSE!" v-show="winner === 2" />
+        <img src="/src/assets/draw.png" alt="DRAW!" v-show="winner === 0" />
     </div>
 </template>
 

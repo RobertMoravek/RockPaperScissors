@@ -54,17 +54,17 @@ watch(
         <img
             src="/src/assets/rock.svg"
             alt="ROCK"
-            v-if="showResult && result == 'Rock'"
+            v-show="showResult && result == 'Rock'"
         />
         <img
             src="/src/assets/paper.svg"
             alt="PAPER"
-            v-if="showResult && result == 'Paper'"
+            v-show="showResult && result == 'Paper'"
         />
         <img
             src="/src/assets/scissors.svg"
             alt="SCISSORS"
-            v-if="showResult && result == 'Scissors'"
+            v-show="showResult && result == 'Scissors'"
         />
     </div>
 </template>

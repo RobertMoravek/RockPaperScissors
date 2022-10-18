@@ -2,21 +2,23 @@
   "name": "rockpaperscissors",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
     "build": "run-p type-check build-only",
-    "preview": "vite preview --port 4173",
-    "build-only": "vite build",
-    "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "start": "vite build"
+    "build-only": "vite build",
+    "dev": "vite",
+    "preview": "vite preview --port 4173",
+    "start": "vite build",
+    "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "register-service-worker": "^1.7.2",
     "vue": "^3.2.38"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/node": "^16.11.56",
     "@vitejs/plugin-vue": "^3.0.3",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "@vue/eslint-config-typescript": "^11.0.0",
     "@vue/tsconfig": "^0.1.3",
@@ -26,6 +28,7 @@
     "prettier": "^2.7.1",
     "typescript": "~4.7.4",
     "vite": "^3.0.9",
+    "vite-plugin-pwa": "^0.13.1",
     "vue-tsc": "^0.40.7"
   }
 }

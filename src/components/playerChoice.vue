@@ -16,22 +16,22 @@ const props = defineProps<{
         <img
             src="/src/assets/rock.svg"
             alt="ROCK"
-            v-if="!running && choice == 'Rock'"
+            v-show="!running && choice == 'Rock'"
         />
         <img
             src="/src/assets/paper.svg"
             alt="PAPER"
-            v-if="!running && choice == 'Paper'"
+            v-show="!running && choice == 'Paper'"
         />
         <img
             src="/src/assets/scissors.svg"
             alt="SCISSORS"
-            v-if="!running && choice == 'Scissors'"
+            v-show="!running && choice == 'Scissors'"
         />
         <img
             src="/src/assets/handleft.svg"
             alt="?"
-            v-if="!running && !choice"
+            v-show="!running && !choice"
         />
     </div>
 </template>
